@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
-public class UIAuthen : MonoBehaviour
+public class UIManager : MonoBehaviour
 {
     [SerializeField] BackendRequest backend;
     [SerializeField] GameObject loginPanel;
@@ -20,6 +20,9 @@ public class UIAuthen : MonoBehaviour
 
     [SerializeField] GameObject popUpMessagePanel;
     [SerializeField] TMP_Text popUpText;
+
+    [Header("Player Info")]
+    [SerializeField] PlayerInfo playerInfo;
 
     private void Start()
     {
