@@ -1,6 +1,7 @@
 <?php
 
-require 'ConnectionSetting.php';
+require 'DBConnectionSetting.php';
+require 'UserDataManager.php';
 
 $signUpUser = $_POST["signUpUser"];
 $signUpPass = $_POST["signUpPass"];
@@ -27,15 +28,4 @@ if ($result->num_rows > 0) {
     }
 }
 
-// insert new user_data
-function NewUserData($conn, $signUpUser)
-{
-
-    $sql = "SELECT id FROM users WHERE username = '" . $signUpUser . "'";
-    $result = $conn->query($sql);
-    $row = $result->fetch_assoc();
-    $id = $row["id"];
-
-    $sql = "INSERT user_data (user_id) VALUES ('$id')";
-}
 ?>

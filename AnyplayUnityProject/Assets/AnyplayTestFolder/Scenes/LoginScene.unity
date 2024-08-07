@@ -677,6 +677,9 @@ MonoBehaviour:
   OnWebResult:
     m_PersistentCalls:
       m_Calls: []
+  OnSighUpSuccess:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &1020554814
 Transform:
   m_ObjectHideFlags: 0
@@ -1612,11 +1615,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5895861151394147035, guid: 7e76d36a5d95a1b4ba849a3bd1a25d8d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5895861151394147035, guid: 7e76d36a5d95a1b4ba849a3bd1a25d8d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 6
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5895861151394147035, guid: 7e76d36a5d95a1b4ba849a3bd1a25d8d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
@@ -1625,7 +1628,7 @@ PrefabInstance:
     - target: {fileID: 5895861151394147035, guid: 7e76d36a5d95a1b4ba849a3bd1a25d8d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 8453765204502659512}
+      objectReference: {fileID: 1133497923}
     - target: {fileID: 5895861151394147035, guid: 7e76d36a5d95a1b4ba849a3bd1a25d8d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
@@ -1640,7 +1643,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5895861151394147035, guid: 7e76d36a5d95a1b4ba849a3bd1a25d8d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetActive
+      value: ShowSignUpPanel
       objectReference: {fileID: 0}
     - target: {fileID: 5895861151394147035, guid: 7e76d36a5d95a1b4ba849a3bd1a25d8d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
@@ -1648,11 +1651,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5895861151394147035, guid: 7e76d36a5d95a1b4ba849a3bd1a25d8d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: UnityEngine.GameObject, UnityEngine
+      value: UIAuthen, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 5895861151394147035, guid: 7e76d36a5d95a1b4ba849a3bd1a25d8d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
       value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 5895861151394147035, guid: 7e76d36a5d95a1b4ba849a3bd1a25d8d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5895861151394147035, guid: 7e76d36a5d95a1b4ba849a3bd1a25d8d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument

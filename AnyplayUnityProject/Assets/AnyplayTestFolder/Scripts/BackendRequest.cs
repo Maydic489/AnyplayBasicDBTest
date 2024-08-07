@@ -9,8 +9,8 @@ public class BackendRequest : MonoBehaviour
     public UnityEvent<string> OnWebResult;
     public UnityEvent OnSighUpSuccess;
 
-    string loginURL = "https://test-piggy.codedefeat.com/worktest/dev01/gameBackend/login.php";
-    string signupURL = "https://test-piggy.codedefeat.com/worktest/dev01/gameBackend/signup.php";
+    string loginURL = "https://test-piggy.codedefeat.com/worktest/dev01/gameBackend/LoginUser.php";
+    string signupURL = "https://test-piggy.codedefeat.com/worktest/dev01/gameBackend/SignupUser.php";
 
     public static BackendRequest Instance;
     private void Awake()

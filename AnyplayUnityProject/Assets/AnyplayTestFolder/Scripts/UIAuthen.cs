@@ -68,6 +68,19 @@ public class UIAuthen : MonoBehaviour
     {
         loginPanel.SetActive(true);
         signupPanel.SetActive(false);
+
+        usernameInput.text = "";
+        passwordInput.text = "";
+    }
+
+    public void ShowSignUpPanel()
+    {
+        loginPanel.SetActive(false);
+        signupPanel.SetActive(true);
+
+        signupUsernameInput.text = "";
+        signupPasswordInput.text = "";
+        confirmPasswordInput.text = "";
     }
 
     public void ShowPopUpMessage(string message)
