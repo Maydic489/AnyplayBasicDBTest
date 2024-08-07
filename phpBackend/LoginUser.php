@@ -2,6 +2,7 @@
 
 require 'DBConnectionSetting.php';
 require 'LoginTimeStamp.php';
+require 'UserDataManager.php';
 
 $loginUser = $_POST["loginUser"];
 $loginPass = $_POST["loginPass"];
@@ -21,6 +22,8 @@ if ($result->num_rows > 0) {
         if ($row["password"] == $loginPass) {
             echo "login Success.<br>";
             UpdateLoginTimeStamp($conn, $loginUser);
+            GetUserData($conn, $loginUser);
+            ;
         } else {
             echo "Wrong Credentials.";
         }

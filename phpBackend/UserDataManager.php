@@ -14,6 +14,39 @@ function NewUserData($conn, $signUpUser)
     }
 }
 
+function GetUserData($conn, $loginUser)
+{
+    $sql = "
+        SELECT users.*, user_data.*
+        FROM users
+        JOIN user_data ON users.id = user_data.user_id
+        WHERE users.username = ?
+    ";
+
+    // Prepare the statement
+    $stmt = $conn->prepare($sql);
+    if ($stmt === false) {
+        echo "Error preparing statement: " . $conn->error;
+        return;
+    }
+
+    // Bind parameters
+    $stmt->bind_param("s", $loginUser);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    // Fetch data
+    $userData = $result->fetch_assoc();
+
+    // Check if data is found
+    if ($userData) {
+        $json = json_encode($userData);
+        echo $json;
+    } else {
+        echo json_encode(["error" => "User not found"]);
+    }
+}
+
 
 
 ?>

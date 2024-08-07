@@ -23,6 +23,7 @@ if ($result->num_rows > 0) {
     if ($conn->query($sql) === TRUE) {
         echo "Signup Success";
         NewUserData($conn, $signUpUser);
+        GetUserData($conn, $signUpUser);
     } else {
         echo "Error: " . $conn->error . "<br>";
     }
