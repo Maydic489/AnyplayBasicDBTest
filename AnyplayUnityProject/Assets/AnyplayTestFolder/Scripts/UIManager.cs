@@ -43,6 +43,7 @@ public class UIManager : MonoBehaviour
             backend.OnLoginSuccess.AddListener(SetLocalUserData);
             backend.OnLoginSuccess.AddListener(ShowLobby);
             backend.OnDiamondsUpdated.AddListener(UpdateDiamond);
+            backend.OnHeartsUpdated.AddListener(UpdateHeart);
         }
     }
 
@@ -114,8 +115,9 @@ public class UIManager : MonoBehaviour
 
     void SetLobby()
     {
-        diamondText.text = localData.userData.diamonds.ToString();
-        heartFill.fillAmount = localData.userData.hearts / 100;
+        UpdateDiamond(localData.userData.diamonds);
+
+        UpdateHeart(localData.userData.hearts);
     }
 
     void UpdateDiamond(int amount)
@@ -126,6 +128,21 @@ public class UIManager : MonoBehaviour
     public void OnClickIncreaseDiamond()
     {
         backend.GetMoreDiamonds(localData.userData.id, 100);
+    }
+
+    void UpdateHeart(int amount)
+    {
+        float floatAmount = amount;
+
+        heartFill.fillAmount = floatAmount / 100f;
+    }
+
+    [ContextMenu("Change Heart Value")]
+    public void ChangeHeartValue()
+    {
+        int randomValue = Random.Range(-10, 10);
+
+        backend.ChangeHeartValue(localData.userData.id, randomValue);
     }
 
     public void ShowPopUpMessage(string message)
