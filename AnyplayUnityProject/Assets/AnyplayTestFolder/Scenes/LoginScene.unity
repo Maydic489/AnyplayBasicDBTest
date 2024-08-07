@@ -565,7 +565,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5847561143516019501, guid: 7878fd7795e55ba4e996891fc29b6e16, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SignUp
+      value: OnClickSignUp
       objectReference: {fileID: 0}
     - target: {fileID: 5847561143516019501, guid: 7878fd7795e55ba4e996891fc29b6e16, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -1571,7 +1571,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2683993053610497795, guid: 7e76d36a5d95a1b4ba849a3bd1a25d8d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Login
+      value: OnClickLogin
       objectReference: {fileID: 0}
     - target: {fileID: 2683993053610497795, guid: 7e76d36a5d95a1b4ba849a3bd1a25d8d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
