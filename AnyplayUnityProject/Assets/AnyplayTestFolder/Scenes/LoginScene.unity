@@ -676,11 +676,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d19a1fb58794d642a0ea3f2ec19f57e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  userID: 0
-  username: 
-  password: 
-  diamonds: 0
-  hearts: 0
+  userData:
+    id: 0
+    username: 
+    password: 
+    user_id: 0
+    diamonds: 0
+    hearts: 0
 --- !u!4 &349361702
 Transform:
   m_ObjectHideFlags: 0
@@ -1579,7 +1581,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1113799089
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1736,7 +1738,8 @@ MonoBehaviour:
   signupButton: {fileID: 485347756}
   popUpMessagePanel: {fileID: 2155945735518560932}
   popUpText: {fileID: 137324611}
-  playerInfo: {fileID: 0}
+  lobbyGroup: {fileID: 1113799088}
+  localData: {fileID: 349361701}
 --- !u!1 &1296018645
 GameObject:
   m_ObjectHideFlags: 0
@@ -2852,7 +2855,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1098474188738020456, guid: 7e76d36a5d95a1b4ba849a3bd1a25d8d, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1559737827281868855, guid: 7e76d36a5d95a1b4ba849a3bd1a25d8d, type: 3}
       propertyPath: m_AnchorMax.y
