@@ -204,7 +204,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 50799050}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1133497923}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: OnClickIncreaseDiamond
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &50799050
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -680,7 +692,6 @@ MonoBehaviour:
     id: 0
     username: 
     password: 
-    user_id: 0
     diamonds: 0
     hearts: 0
 --- !u!4 &349361702
@@ -1739,6 +1750,8 @@ MonoBehaviour:
   popUpMessagePanel: {fileID: 2155945735518560932}
   popUpText: {fileID: 137324611}
   lobbyGroup: {fileID: 1113799088}
+  heartFill: {fileID: 320400796}
+  diamondText: {fileID: 2085401322}
   localData: {fileID: 349361701}
 --- !u!1 &1296018645
 GameObject:

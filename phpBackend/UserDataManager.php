@@ -40,13 +40,40 @@ function GetUserData($conn, $loginUser)
 
     // Check if data is found
     if ($userData) {
-        $json = json_encode($userData);
-        echo $json;
+        //$json = json_encode($userData);
+        //echo $json;
+        return $userData;
     } else {
-        echo json_encode(["error" => "User not found"]);
+        return ["error" => "User not found"];
     }
 }
 
+function UpdateUserDiamonds($conn, $user_id, $diamonds)
+{
+    $sql = "
+        UPDATE user_data
+        SET diamonds = ?
+        WHERE user_id = ?
+    ";
 
+    // Prepare the statement
+    $stmt = $conn->prepare($sql);
+    if ($stmt === false) {
+        echo "Error preparing statement: " . $conn->error;
+        return;
+    }
+
+    // Bind parameters
+    $stmt->bind_param("ii", $diamonds, $user_id);
+
+    // Execute the statement
+    if ($stmt->execute() === false) {
+        echo "Error executing statement: " . $stmt->error;
+        return;
+    }
+
+    // Close the statement
+    $stmt->close();
+}
 
 ?>

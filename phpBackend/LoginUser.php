@@ -16,21 +16,25 @@ $sql = "SELECT password FROM users WHERE username = '" . $loginUser . "'";
 
 $result = $conn->query($sql);
 
+$response = array();
+
 if ($result->num_rows > 0) {
     // output data of each row
     while ($row = $result->fetch_assoc()) {
         if ($row["password"] == $loginPass) {
-            echo "login Success.<br>";
             UpdateLoginTimeStamp($conn, $loginUser);
-            GetUserData($conn, $loginUser);
-            ;
+            $userData = GetUserData($conn, $loginUser);
+            $response["message"] = "login Success.";
+            $response["data"] = $userData;
         } else {
-            echo "Wrong Credentials.";
+            $response["message"] = "Wrong Credentials.";
         }
     }
 } else {
-    echo "Username doesn't exist.";
+    $response["message"] = "Username doesn't exist.";
 }
 $conn->close();
+
+echo json_encode($response);
 
 ?>

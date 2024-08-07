@@ -6,27 +6,55 @@ require 'UserDataManager.php';
 $signUpUser = $_POST["signUpUser"];
 $signUpPass = $_POST["signUpPass"];
 
+$response = array();
+
 // Check connection
 if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+    $response["status"] = "error";
+    $response["message"] = "Connection failed: " . $conn->connect_error;
+    echo json_encode($response);
+    exit();
 }
 
-$sql = "SELECT username FROM users WHERE username = '" . $signUpUser . "'";
+$sql = "SELECT username FROM users WHERE username = ?";
 
-// check if username already exists
-$result = $conn->query($sql);
+// Prepare the statement
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("s", $signUpUser);
+$stmt->execute();
+$result = $stmt->get_result();
+
+// Check if username already exists
 if ($result->num_rows > 0) {
-    echo "Username already exists";
+    $response["status"] = "error";
+    $response["message"] = "Username already exists";
 } else {
-    $sql = "INSERT users (username, password) VALUES ('$signUpUser', '$signUpPass')";
+    $sql = "INSERT INTO users (username, password) VALUES (?, ?)";
 
-    if ($conn->query($sql) === TRUE) {
-        echo "Signup Success";
+    // Prepare the statement
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ss", $signUpUser, $signUpPass);
+
+    if ($stmt->execute() === TRUE) {
+        $response["status"] = "success";
+        $response["message"] = "Signup Success";
+
+        // Create new user data
         NewUserData($conn, $signUpUser);
-        GetUserData($conn, $signUpUser);
+
+        // Get user data
+        $userData = GetUserData($conn, $signUpUser);
+        $response["data"] = $userData;
     } else {
-        echo "Error: " . $conn->error . "<br>";
+        $response["status"] = "error";
+        $response["message"] = "Error: " . $conn->error;
     }
 }
+
+// Close the statement
+$stmt->close();
+
+// Output the response as JSON
+echo json_encode($response);
 
 ?>

@@ -27,6 +27,8 @@ public class UIManager : MonoBehaviour
 
     [Header("Lobby")]
     [SerializeField] GameObject lobbyGroup;
+    [SerializeField] Image heartFill;
+    [SerializeField] TMP_Text diamondText;
 
     [Header("Player Info")]
     [SerializeField] LocalUserData localData;
@@ -38,18 +40,10 @@ public class UIManager : MonoBehaviour
             backend = BackendRequest.Instance;
             backend.OnWebResult.AddListener(ShowPopUpMessage);
             backend.OnSighUpSuccess.AddListener(ShowLoginPanel);
-            backend.OnWebResult.AddListener(ShowLobby);
+            backend.OnLoginSuccess.AddListener(SetLocalUserData);
+            backend.OnLoginSuccess.AddListener(ShowLobby);
+            backend.OnDiamondsUpdated.AddListener(UpdateDiamond);
         }
-
-        //string json = "{\"id\":1,\"username\":\"test01\",\"password\":\"1234\",\"user_id\":1,\"diamonds\":0,\"hearts\":0}";
-        //PlayerInfo playerInfo = JsonUtility.FromJson<PlayerInfo>(json);
-
-        //Debug.Log("Player ID: " + playerInfo.id);
-        //Debug.Log("Username: " + playerInfo.username);
-        //Debug.Log("Password: " + playerInfo.password);
-        //Debug.Log("User ID: " + playerInfo.user_id);
-        //Debug.Log("Diamonds: " + playerInfo.diamonds);
-        //Debug.Log("Hearts: " + playerInfo.hearts);
     }
 
     public void OnClickLogin()
@@ -104,15 +98,34 @@ public class UIManager : MonoBehaviour
         confirmPasswordInput.text = "";
     }
 
-    void ShowLobby(string userData)
+    void SetLocalUserData(UserData userData)
+    {
+        localData.userData = userData;
+    }
+
+    void ShowLobby(UserData userData)
     {
         lobbyGroup.SetActive(true);
         loginPanel.SetActive(false);
         signupPanel.SetActive(false);
 
-        userData = userData.Remove(0, 18);
-        Debug.Log(userData);
-        localData.userData = JsonUtility.FromJson<UserData>(userData);
+        SetLobby();
+    }
+
+    void SetLobby()
+    {
+        diamondText.text = localData.userData.diamonds.ToString();
+        heartFill.fillAmount = localData.userData.hearts / 100;
+    }
+
+    void UpdateDiamond(int amount)
+    {
+        diamondText.text = amount.ToString();
+    }
+
+    public void OnClickIncreaseDiamond()
+    {
+        backend.GetMoreDiamonds(localData.userData.id, 100);
     }
 
     public void ShowPopUpMessage(string message)
