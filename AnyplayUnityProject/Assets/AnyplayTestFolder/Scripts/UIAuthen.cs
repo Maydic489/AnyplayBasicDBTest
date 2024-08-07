@@ -18,6 +18,19 @@ public class UIAuthen : MonoBehaviour
     [SerializeField] TMP_InputField confirmPasswordInput;
     [SerializeField] Button signupButton;
 
+    [SerializeField] GameObject popUpMessagePanel;
+    [SerializeField] TMP_Text popUpText;
+
+    private void Start()
+    {
+        if(BackendRequest.Instance != null)
+        {
+            backend = BackendRequest.Instance;
+            backend.OnWebResult.AddListener(ShowPopUpMessage);
+            backend.OnSighUpSuccess.AddListener(ShowLoginPanel);
+        }
+    }
+
     public void Login()
     {
         if (backend == null)
@@ -29,8 +42,37 @@ public class UIAuthen : MonoBehaviour
         }
         else
         {
-            //TODO: message popup instead
-            Debug.Log("The username or password is empty");
+            ShowPopUpMessage("The username or password is empty");
         }
+    }
+
+    public void SignUp()
+    {
+        if (backend == null)
+            return;
+
+        if(signupUsernameInput.text != "" && signupPasswordInput.text != "" && confirmPasswordInput.text != "")
+        {
+            if(signupPasswordInput.text == confirmPasswordInput.text)
+            {
+                backend.RequestSignUp(signupUsernameInput.text, signupPasswordInput.text);
+            }
+            else
+            {
+                ShowPopUpMessage("Password and Confirm Password are not the same");
+            }
+        }
+    }
+
+    public void ShowLoginPanel()
+    {
+        loginPanel.SetActive(true);
+        signupPanel.SetActive(false);
+    }
+
+    public void ShowPopUpMessage(string message)
+    {
+        popUpMessagePanel.SetActive(true);
+        popUpText.text = message;
     }
 }

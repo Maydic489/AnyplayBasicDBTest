@@ -9,7 +9,6 @@ $loginPass = $_POST["loginPass"];
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
-echo "Connected successfully <br>";
 
 $sql = "SELECT password FROM users WHERE username = '" . $loginUser . "'";
 
