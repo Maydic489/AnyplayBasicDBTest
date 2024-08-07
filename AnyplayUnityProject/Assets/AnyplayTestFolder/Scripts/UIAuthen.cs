@@ -31,14 +31,14 @@ public class UIAuthen : MonoBehaviour
         }
     }
 
-    public void Login()
+    public void OnClickLogin()
     {
         if (backend == null)
             return;
 
         if(usernameInput.text != "" && passwordInput.text != "")
         {
-            backend.RequestLogin(usernameInput.text, passwordInput.text);
+            backend.Login(usernameInput.text, passwordInput.text);
         }
         else
         {
@@ -46,7 +46,7 @@ public class UIAuthen : MonoBehaviour
         }
     }
 
-    public void SignUp()
+    public void OnClickSignUp()
     {
         if (backend == null)
             return;
@@ -55,7 +55,7 @@ public class UIAuthen : MonoBehaviour
         {
             if(signupPasswordInput.text == confirmPasswordInput.text)
             {
-                backend.RequestSignUp(signupUsernameInput.text, signupPasswordInput.text);
+                backend.SignUp(signupUsernameInput.text, signupPasswordInput.text);
             }
             else
             {

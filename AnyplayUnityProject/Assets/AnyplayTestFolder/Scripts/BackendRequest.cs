@@ -39,12 +39,12 @@ public class BackendRequest : MonoBehaviour
         //StartCoroutine(Login("test01", "1150"));
     }
 
-    public void RequestLogin(string username, string password)
+    public void Login(string username, string password)
     {
-        StartCoroutine(Login(username, password));
+        StartCoroutine(RequestLogin(username, password));
     }
 
-    IEnumerator Login(string username, string password)
+    IEnumerator RequestLogin(string username, string password)
     {
         WWWForm form = new WWWForm();
         form.AddField("loginUser", username);
@@ -67,12 +67,12 @@ public class BackendRequest : MonoBehaviour
         }
     }
 
-    public void RequestSignUp(string username, string password)
+    public void SignUp(string username, string password)
     {
-        StartCoroutine(SignUp(username, password));
+        StartCoroutine(RequestSignUp(username, password));
     }
 
-    IEnumerator SignUp(string username, string password)
+    IEnumerator RequestSignUp(string username, string password)
     {
         WWWForm form = new WWWForm();
         form.AddField("signUpUser", username);
