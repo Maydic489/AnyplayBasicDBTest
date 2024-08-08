@@ -9,7 +9,10 @@ $loginPass = $_POST["loginPass"];
 
 // Check connection
 if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+    $response["success"] = false;
+    $response["message"] = "Connection failed: " . $conn->connect_error;
+    echo json_encode($response);
+    exit();
 }
 
 $sql = "SELECT password FROM users WHERE username = '" . $loginUser . "'";

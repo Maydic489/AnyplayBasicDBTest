@@ -10,7 +10,7 @@ $response = array();
 
 // Check connection
 if ($conn->connect_error) {
-    $response["status"] = "error";
+    $response["success"] = false;
     $response["message"] = "Connection failed: " . $conn->connect_error;
     echo json_encode($response);
     exit();
@@ -26,7 +26,7 @@ $result = $stmt->get_result();
 
 // Check if username already exists
 if ($result->num_rows > 0) {
-    $response["status"] = "error";
+    $response["success"] = false;
     $response["message"] = "Username already exists";
 } else {
     $sql = "INSERT INTO users (username, password) VALUES (?, ?)";
@@ -36,7 +36,7 @@ if ($result->num_rows > 0) {
     $stmt->bind_param("ss", $signUpUser, $signUpPass);
 
     if ($stmt->execute() === TRUE) {
-        $response["status"] = "success";
+        $response["success"] = true;
         $response["message"] = "Signup Success";
 
         // Create new user data
@@ -46,7 +46,7 @@ if ($result->num_rows > 0) {
         $userData = GetUserData($conn, $signUpUser);
         $response["data"] = $userData;
     } else {
-        $response["status"] = "error";
+        $response["success"] = false;
         $response["message"] = "Error: " . $conn->error;
     }
 }

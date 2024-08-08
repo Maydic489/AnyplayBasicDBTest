@@ -8,7 +8,10 @@ $diamondAmout = $_POST["diamondAmout"];
 
 // Check connection
 if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+    $response["success"] = false;
+    $response["message"] = "Connection failed: " . $conn->connect_error;
+    echo json_encode($response);
+    exit();
 }
 
 // get current diamonds in db
@@ -24,6 +27,7 @@ $response = array();
 
 UpdateUserDiamonds($conn, $updateUserID, $newDiamonds);
 
+$response["success"] = true;
 $response["message"] = "You got " . $diamondAmout . " diamonds!";
 $response["diamonds"] = $newDiamonds;
 

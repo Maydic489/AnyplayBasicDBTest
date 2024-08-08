@@ -24,6 +24,7 @@ $response = array();
 
 UpdateUserHearts($conn, $updateUserID, $newHearts);
 
+$response["success"] = true;
 $response["message"] = "You heart changed by " . $heartAmout . " point!";
 $response["hearts"] = $newHearts;
 
