@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 public class BackendRequest : MonoBehaviour
 {
-    public UnityEvent<string> OnWebResult;
+    public UnityEvent<bool, string> OnWebResult;
     public UnityEvent OnSighUpSuccess;
     public UnityEvent<UserData> OnLoginSuccess;
     public UnityEvent<int> OnDiamondsUpdated;
@@ -31,7 +31,7 @@ public class BackendRequest : MonoBehaviour
 
         if(OnWebResult == null)
         {
-            OnWebResult = new UnityEvent<string>();
+            OnWebResult = new UnityEvent<bool, string>();
         }
         if(OnSighUpSuccess == null)
         {
@@ -62,15 +62,16 @@ public class BackendRequest : MonoBehaviour
             if (www.result != UnityWebRequest.Result.Success)
             {
                 Debug.Log(www.error);
-                this.OnWebResult?.Invoke(www.error);
+                this.OnWebResult?.Invoke(false, www.error);
             }
             else
             {
-                // seperate json with "message" key and "data" key
                 Response response = JsonUtility.FromJson<Response>(www.downloadHandler.text);
 
-                this.OnWebResult?.Invoke(response.message);
-                this.OnLoginSuccess?.Invoke(response.data);
+                this.OnWebResult?.Invoke(response.success, response.message);
+
+                if(response.success)
+                    this.OnLoginSuccess?.Invoke(response.data);
             }
         }
     }
@@ -93,14 +94,16 @@ public class BackendRequest : MonoBehaviour
             if (www.result != UnityWebRequest.Result.Success)
             {
                 Debug.Log(www.error);
-                this.OnWebResult?.Invoke(www.error);
+                this.OnWebResult?.Invoke(false, www.error);
             }
             else
             {
                 Response response = JsonUtility.FromJson<Response>(www.downloadHandler.text);
                 Debug.Log(www.downloadHandler.text);
-                this.OnWebResult?.Invoke(response.message);
-                this.OnSighUpSuccess?.Invoke();
+                this.OnWebResult?.Invoke(response.success, response.message);
+
+                if(response.success)
+                    this.OnSighUpSuccess?.Invoke();
             }
         }
     }
@@ -123,14 +126,16 @@ public class BackendRequest : MonoBehaviour
             if (www.result != UnityWebRequest.Result.Success)
             {
                 Debug.Log(www.error);
-                this.OnWebResult?.Invoke(www.error);
+                this.OnWebResult?.Invoke(false, www.error);
             }
             else
             {
                 Response response = JsonUtility.FromJson<Response>(www.downloadHandler.text);
 
-                this.OnWebResult?.Invoke(response.message);
-                this.OnDiamondsUpdated?.Invoke(response.diamonds);
+                this.OnWebResult?.Invoke(true, response.message);
+
+                if(response.success)
+                    this.OnDiamondsUpdated?.Invoke(response.diamonds);
             }
         }
     }
@@ -153,14 +158,16 @@ public class BackendRequest : MonoBehaviour
             if (www.result != UnityWebRequest.Result.Success)
             {
                 Debug.Log(www.error);
-                this.OnWebResult?.Invoke(www.error);
+                this.OnWebResult?.Invoke(false, www.error);
             }
             else
             {
                 Response response = JsonUtility.FromJson<Response>(www.downloadHandler.text);
 
-                this.OnWebResult?.Invoke(response.message);
-                this.OnHeartsUpdated?.Invoke(response.hearts);
+                this.OnWebResult?.Invoke(true, response.message);
+
+                if(response.success)
+                    this.OnHeartsUpdated?.Invoke(response.hearts);
             }
         }
     }
@@ -169,6 +176,7 @@ public class BackendRequest : MonoBehaviour
 [System.Serializable]
 public class Response
 {
+    public bool success;
     public string message;
     public UserData data;
     public int diamonds;

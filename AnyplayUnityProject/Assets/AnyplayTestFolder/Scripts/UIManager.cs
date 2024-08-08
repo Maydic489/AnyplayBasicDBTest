@@ -54,7 +54,7 @@ public class UIManager : MonoBehaviour
         }
         else
         {
-            ShowPopUpMessage("The username or password is empty");
+            ShowPopUpMessage(false, "The username or password is empty");
         }
     }
 
@@ -71,7 +71,7 @@ public class UIManager : MonoBehaviour
             }
             else
             {
-                ShowPopUpMessage("Password and Confirm Password are not the same");
+                ShowPopUpMessage(false, "Password and Confirm Password are not the same");
             }
         }
     }
@@ -136,7 +136,7 @@ public class UIManager : MonoBehaviour
         backend.ChangeHeartValue(LobbyManager.Instance.localData.userData.id, randomValue);
     }
 
-    public void ShowPopUpMessage(string message)
+    public void ShowPopUpMessage(bool result, string message)
     {
         popUpMessagePanel.SetActive(true);
         popUpText.text = message;

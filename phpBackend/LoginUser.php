@@ -24,13 +24,16 @@ if ($result->num_rows > 0) {
         if ($row["password"] == $loginPass) {
             UpdateLoginTimeStamp($conn, $loginUser);
             $userData = GetUserData($conn, $loginUser);
+            $response["success"] = true;
             $response["message"] = "login Success.";
             $response["data"] = $userData;
         } else {
+            $response["success"] = false;
             $response["message"] = "Wrong Credentials.";
         }
     }
 } else {
+    $response["success"] = false;
     $response["message"] = "Username doesn't exist.";
 }
 $conn->close();
