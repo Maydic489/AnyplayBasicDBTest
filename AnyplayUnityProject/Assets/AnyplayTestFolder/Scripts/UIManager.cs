@@ -30,9 +30,6 @@ public class UIManager : MonoBehaviour
     [SerializeField] Image heartFill;
     [SerializeField] TMP_Text diamondText;
 
-    [Header("Player Info")]
-    [SerializeField] LocalUserData localData;
-
     private void Start()
     {
         if(BackendRequest.Instance != null)
@@ -40,7 +37,6 @@ public class UIManager : MonoBehaviour
             backend = BackendRequest.Instance;
             backend.OnWebResult.AddListener(ShowPopUpMessage);
             backend.OnSighUpSuccess.AddListener(ShowLoginPanel);
-            backend.OnLoginSuccess.AddListener(SetLocalUserData);
             backend.OnLoginSuccess.AddListener(ShowLobby);
             backend.OnDiamondsUpdated.AddListener(UpdateDiamond);
             backend.OnHeartsUpdated.AddListener(UpdateHeart);
@@ -99,11 +95,6 @@ public class UIManager : MonoBehaviour
         confirmPasswordInput.text = "";
     }
 
-    void SetLocalUserData(UserData userData)
-    {
-        localData.userData = userData;
-    }
-
     void ShowLobby(UserData userData)
     {
         lobbyGroup.SetActive(true);
@@ -115,9 +106,9 @@ public class UIManager : MonoBehaviour
 
     void SetLobby()
     {
-        UpdateDiamond(localData.userData.diamonds);
+        UpdateDiamond(LobbyManager.Instance.localData.userData.diamonds);
 
-        UpdateHeart(localData.userData.hearts);
+        UpdateHeart(LobbyManager.Instance.localData.userData.hearts);
     }
 
     void UpdateDiamond(int amount)
@@ -127,7 +118,7 @@ public class UIManager : MonoBehaviour
 
     public void OnClickIncreaseDiamond()
     {
-        backend.GetMoreDiamonds(localData.userData.id, 100);
+        backend.GetMoreDiamonds(LobbyManager.Instance.localData.userData.id, 100);
     }
 
     void UpdateHeart(int amount)
@@ -142,7 +133,7 @@ public class UIManager : MonoBehaviour
     {
         int randomValue = Random.Range(-10, 10);
 
-        backend.ChangeHeartValue(localData.userData.id, randomValue);
+        backend.ChangeHeartValue(LobbyManager.Instance.localData.userData.id, randomValue);
     }
 
     public void ShowPopUpMessage(string message)
